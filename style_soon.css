@@ -2,7 +2,7 @@
 :root {
     --site-bg: #030305;
     --neon-blue: #00d4ff;     /* الأزرق النيون المسيطر */
-    --neon-red: #ff1e39;      /* الأحمر النيون الخاص بهوية GAMES */
+    --neon-red: #ff1e39;      /* الأحمر النيون لـ GAMES والـ Highlights */
     --pure-white: #ffffff;    /* الأبيض الصريح لـ MEGA */
     --text-dim: #bbb;
 }
@@ -18,7 +18,8 @@ body {
     color: #fff;
     font-family: 'Cairo', sans-serif;
     min-height: 100vh;
-    overflow-x: hidden;
+    /* منع السكرول العمودي في الشاشات العادية وضمان ثبات الخلفية */
+    overflow-x: hidden; 
     position: relative;
 }
 
@@ -26,7 +27,7 @@ body {
     font-family: 'Orbitron', sans-serif;
 }
 
-/* --- عناصر التعبئة الخلفية المتقدمة (Cyberpunk Vibe) --- */
+/* --- عناصر التعبئة الخلفية السيبرانية --- */
 .scanlines {
     position: fixed;
     inset: 0;
@@ -68,7 +69,7 @@ body {
 .blue-orb { top: -10%; left: -10%; width: 400px; height: 400px; background: var(--neon-blue); }
 .red-orb { bottom: 5%; right: -5%; width: 450px; height: 450px; background: var(--neon-red); }
 
-/* --- حاوية الصفحة المركزية الموزعة بالمسطرة --- */
+/* --- الحاوية المركزية المرنة لجميع الشاشات --- */
 .error-page-wrapper {
     min-height: 100vh;
     display: flex;
@@ -76,19 +77,22 @@ body {
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    padding: 30px 20px;
+    padding: 40px 24px; /* حماية الأطراف في الشاشات الصغيرة */
     position: relative;
     z-index: 10;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* --- اللوجو الضخم الفخم مع مسافة تنفس مريحة --- */
+/* --- اللوجو الضخم الفخم (مقاس ديناميكي مرن) --- */
 .logo-title-wrapper {
     display: flex;
     font-family: 'Orbitron', sans-serif;
-    font-size: 5.5rem;
+    font-size: clamp(2.5rem, 6vw, 5.5rem); /* بيكبر ويصغر تلقائي حسب الشاشة بدون ما يضرب */
     font-weight: 900;
     line-height: 1.1;
-    margin-bottom: 45px; /* مسافة أمان ممتازة لتفادي تلاحم اللوجو مع الأيقونات */
+    margin-bottom: clamp(20px, 4vw, 45px); /* مسافة مرنة بين اللوجو والأيقونات */
     letter-spacing: 2px;
     animation: glitch-title-anim 3s infinite;
 }
@@ -106,15 +110,15 @@ body {
     margin-left: 12px;
 }
 
-/* --- تنسيق وتوهج الأيقونات السيبرانية (تم إضافة لير إجبار الاتجاه لمنع الفوضى) --- */
+/* --- تنسيق وتوهج الأيقونات السيبرانية الموزعة --- */
 .cyber-icons {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 25px;
-    font-size: 2.2rem;
-    margin-bottom: 25px; /* مسافة مريحة تفصل الأيقونات عن التاج الفرعي */
-    direction: ltr !important; /* إجبار الأيقونات تقرأ من اليسار لليمين عشان ترتيب الصاعقة يفضل في النص */
+    gap: clamp(15px, 3vw, 25px);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    margin-bottom: clamp(15px, 3vw, 25px);
+    direction: ltr !important; 
     animation: float 3s ease-in-out infinite;
 }
 
@@ -122,74 +126,150 @@ body {
 .icon-red { color: var(--neon-red); filter: drop-shadow(0 0 10px var(--neon-red)); }
 .icon-mix { color: #fff; filter: drop-shadow(0 0 12px var(--neon-red)) drop-shadow(0 0 4px #fff); }
 
-/* التاج الفرعي */
+/* التاج الفرعي الشيك */
 .store-tag {
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.85rem;
+    font-size: clamp(0.65rem, 1.2vw, 0.85rem);
     color: var(--neon-blue);
-    letter-spacing: 3px;
-    margin-bottom: 35px; /* مسافة ممتازة قبل الدخول في نصوص الرسالة */
+    letter-spacing: clamp(1.5px, 0.3vw, 3px);
+    margin-bottom: clamp(25px, 4vw, 35px);
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
     font-weight: 700;
 }
 
-/* --- تنسيق لغة الجيمرز الروشة --- */
+/* --- تنسيق منطقة النصوص المباشرة الروشة --- */
+.error-message {
+    width: 100%;
+    max-width: 650px; /* ضمان عدم تمدد السطور بشكل منفر في الشاشات الواسعة */
+}
+
 .error-message h1 {
-    font-size: 2.4rem;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
     font-weight: 900;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: #fff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 .clean-description {
     color: var(--text-dim);
-    font-size: 1.15rem;
-    max-width: 520px; 
-    margin: 0 auto 30px;
-    line-height: 1.7;
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    margin: 0 auto clamp(30px, 5vw, 45px); 
+    line-height: 1.8; 
     font-weight: 600;
 }
 
-.highlight {
-    color: var(--neon-red); 
+.highlight-blue {
+    color: var(--neon-blue);
     font-weight: 700;
-    text-shadow: 0 0 8px rgba(255, 30, 57, 0.3);
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
 }
 
-/* --- العداد التنازلي النيون للأزرق --- */
-.neon-countdown { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 35px; }
-.capsule-box { border: 1px solid rgba(0, 212, 255, 0.25); background: rgba(3, 3, 5, 0.85); padding: 10px 22px; border-radius: 12px; min-width: 85px; text-align: center; box-shadow: 0 0 15px rgba(0, 212, 255, 0.1); backdrop-filter: blur(5px); }
-.capsule-box span { display: block; font-size: 2rem; font-weight: 900; color: #fff; text-shadow: 0 0 10px var(--neon-blue); line-height: 1; }
-.capsule-box small { font-size: 0.6rem; color: var(--neon-blue); letter-spacing: 1px; display: block; margin-top: 5px; font-weight: bold; }
-.capsule-dots { font-size: 1.8rem; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); animation: blink 1s infinite; }
+.highlight-red {
+    color: var(--neon-red);
+    font-weight: 700; 
+    text-shadow: 0 0 5px rgba(255, 30, 57, 0.4); 
+}
 
-/* --- شريط التحميل --- */
-.progress-container { width: 100%; max-width: 500px; }
-.progress-bar-wrapper { width: 100%; height: 8px; background: rgba(3, 3, 5, 0.8); border: 1px solid rgba(0, 212, 255, 0.15); border-radius: 50px; overflow: hidden; padding: 1px; backdrop-filter: blur(5px); }
-.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--neon-blue), var(--neon-red)); border-radius: 50px; box-shadow: 0 0 20px var(--neon-blue), 0 0 10px var(--neon-red); transition: width 0.1s linear; }
-.progress-text { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--neon-blue); margin-top: 10px; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0, 212, 255, 0.2); font-weight: bold; }
+/* --- العداد التنازلي المرن جداً --- */
+.neon-countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(8px, 1.8vw, 15px);
+    margin-bottom: clamp(30px, 5vw, 35px);
+    width: 100%;
+}
 
-/* --- استجابة الشاشات الصغيرة والموبايل (Responsive) --- */
-@media (max-width: 768px) {
-    .logo-title-wrapper { 
-        font-size: 2.8rem; 
-        margin-bottom: 30px; 
+.capsule-box {
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    background: rgba(3, 3, 5, 0.85); 
+    padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2.5vw, 22px);
+    border-radius: 12px;
+    min-width: clamp(65px, 10vw, 85px);
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.capsule-box span {
+    display: block;
+    font-size: clamp(1.4rem, 2.8vw, 2.0rem);
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-blue); 
+    line-height: 1;
+}
+
+.capsule-box small {
+    font-size: clamp(0.5rem, 0.9vw, 0.6rem);
+    color: var(--neon-blue);
+    letter-spacing: 1px;
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.capsule-dots {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px var(--neon-blue);
+    animation: blink 1s infinite;
+}
+
+/* --- شريط التحميل المتجاوب بالكامل --- */
+.progress-container {
+    width: 100%;
+    max-width: clamp(280px, 80vw, 500px); /* يضبط مقاسه على الموبايل تلقائياً */
+}
+
+.progress-bar-wrapper {
+    width: 100%;
+    height: clamp(6px, 1vw, 8px);
+    background: rgba(3, 3, 5, 0.8);
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    border-radius: 50px;
+    overflow: hidden;
+    padding: 1px;
+    backdrop-filter: blur(5px);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-red));
+    border-radius: 50px;
+    box-shadow: 0 0 20px var(--neon-blue), 0 0 10px var(--neon-red);
+    transition: width 0.1s linear;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(0.65rem, 1vw, 0.75rem);
+    color: var(--neon-blue);
+    margin-top: 10px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    font-weight: bold;
+}
+
+/* --- شاشات الموبايل الرأسية الضيقة (إجراء حماية إضافي) --- */
+@media (max-width: 480px) {
+    .error-page-wrapper {
+        padding: 25px 15px;
     }
-    .cyber-icons { 
-        font-size: 1.6rem; 
-        gap: 15px; 
-        margin-bottom: 20px;
+    .neon-countdown {
+        gap: 5px;
     }
-    .store-tag { 
-        font-size: 0.65rem; 
-        letter-spacing: 1.5px; 
-        margin-bottom: 25px;
+    .capsule-box {
+        padding: 6px 10px;
+        min-width: 58px;
     }
-    .error-message h1 { font-size: 1.8rem; }
-    .clean-description { font-size: 1rem; padding: 0 10px; }
-    .capsule-box { min-width: 70px; padding: 8px 14px; }
-    .capsule-box span { font-size: 1.5rem; }
+    /* إلغاء قفزة السطر بالـ <br> على الموبايل عشان الجملة متطلعش مقطوعة بزيادة */
+    .clean-description br {
+        display: none;
+    }
 }
 
 /* --- الأنيميشنات الحركية --- */
@@ -201,32 +281,5 @@ body {
     80% { transform: translate(2px, -2px); }
     100% { transform: translate(0); }
 }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @keyframes blink { 50% { opacity: 0.3; } }
-
-
-/* اللون الأحمر النيون الصاخب بعد ما طفينا الإضاءة الشاععة */
-.highlight-red {
-    color: var(--neon-red);
-    font-weight: 700; 
-    /* شيلنا التوهج القديم الضخم وحطينا لمسة خفيفة جداً وناعمة */
-    text-shadow: 0 0 5px rgba(255, 30, 57, 0.4); 
-}
-
-/* الأزرق يفضل ناعم وهادي برضه */
-.highlight-blue {
-    color: var(--neon-blue);
-    font-weight: 700;
-    text-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
-}
-
-/* باقي تنسيق البرجراف يفضل زي ما هو مستقر ومريح */
-.clean-description {
-    color: var(--text-dim);
-    font-family: 'Cairo', sans-serif;
-    font-size: 1.15rem;
-    max-width: 650px; 
-    margin: 0 auto 45px; 
-    line-height: 1.9; 
-    font-weight: 600;
-}
